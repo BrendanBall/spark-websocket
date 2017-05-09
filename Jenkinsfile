@@ -1,19 +1,26 @@
-node {
-  def appName = 'spark-websocket'
-  def imageTag = "uctdemo/spark-websocket:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+pipeline {
+    agent any
+    environment {
+        IMAGE_TAG = 'uctdemo/spark-websocket:${env.BRANCH_NAME}.${env.BUILD_NUMBER}'
+    }
+    stages {
+        stage ('compile') {
+            steps {
+                sh('./gradlew clean build')
+            }
+        }
 
-  checkout scm
+        stage ('build docker image') {
+            steps {
+                sh('docker build -t $IMAGE_TAG .')
+            }
+        }
 
-  stage ('compile') {
-    sh("./gradlew build")
-  }
-
-  stage ('build docker image') {
-    sh("docker build -t ${imageTag} .")
-  }
-
-  stage ('deploy') {
-    sh("sed -i.bak 's#uctdemo/spark-websocket:master.1#${imageTag}#' ./k8s/production/*.yaml")
-    sh("kubectl apply -f k8s/production/")
-  }
+        stage ('deploy') {
+            steps {
+                sh('sed -i.bak 's#uctdemo/spark-websocket:master.1#$IMAGE_TAG#' ./k8s/production/*.yaml')
+                sh('kubectl apply -f k8s/production/')
+            }
+        }
+    }
 }
