@@ -19,6 +19,7 @@ public class Chat {
         port(8080);
         webSocket("/chat", ChatWebSocketHandler.class);
         get("/healthcheck", (req, res) -> "healthy");
+        get("/test", (req, res) -> "{\"test\":\"hello\"}");
         init();
     }
 
