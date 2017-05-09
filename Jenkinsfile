@@ -5,7 +5,7 @@ node {
   checkout scm
 
   stage 'compile'
-  sh("./gradle build")
+  sh("./gradlew build")
 
   stage 'build docker image'
   sh("docker build -t ${imageTag} .")
