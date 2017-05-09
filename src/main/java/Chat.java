@@ -22,6 +22,7 @@ public class Chat {
         get("/test", (req, res) -> "{\"test\":\"hello\"}");
         get("/test2", (req, res) -> "{\"test\":\"hello2\"}");
         get("/test3", (req, res) -> "{\"test\":\"hello3\"}");
+        get("/test4", (req, res) -> "{\"test\":\"hello4\"}");
         init();
     }
 
