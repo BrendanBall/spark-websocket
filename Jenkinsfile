@@ -1,12 +1,14 @@
 node {
   def appName = 'spark-websocket'
-  def imageTag = "uctdemo/spark-websocket::${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+  def imageTag = "uctdemo/spark-websocket:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
   checkout scm
 
-  stage 'compile'
-  sh("./gradlew build")
+  stage ('compile') {
+    sh("./gradlew build")
+  }
 
-  stage 'build docker image'
-  sh("docker build -t ${imageTag} .")
+  stage ('build docker image') {
+    sh("docker build -t ${imageTag} .")
+  }
 }
