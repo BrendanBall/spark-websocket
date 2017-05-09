@@ -24,3 +24,12 @@ dependencies {
     compile group: 'org.json', name: 'json', version:'20160810'
     compile group: 'org.slf4j', name: 'slf4j-simple', version:'1.7.21'
 }
+
+jar {
+  manifest {
+    attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'Chat'
+    )
+  }
+}

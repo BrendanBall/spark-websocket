@@ -16,6 +16,7 @@ public class Chat {
     public static void main(String[] args) {
         staticFiles.location("/public"); //index.html is served at localhost:4567 (default port)
         staticFiles.expireTime(600);
+        port(8080);
         webSocket("/chat", ChatWebSocketHandler.class);
         init();
     }
