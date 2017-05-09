@@ -18,7 +18,7 @@ pipeline {
 
         stage ('deploy') {
             steps {
-                sh('sed -i.bak 's#uctdemo/spark-websocket:master.1#$IMAGE_TAG#' ./k8s/production/*.yaml')
+                sh("sed -i.bak 's#uctdemo/spark-websocket:master.1#$IMAGE_TAG#' ./k8s/production/*.yaml")
                 sh('kubectl apply -f k8s/production/')
             }
         }
