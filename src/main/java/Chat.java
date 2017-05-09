@@ -20,6 +20,7 @@ public class Chat {
         webSocket("/chat", ChatWebSocketHandler.class);
         get("/healthcheck", (req, res) -> "healthy");
         get("/test", (req, res) -> "{\"test\":\"hello\"}");
+        get("/test2", (req, res) -> "{\"test\":\"hello2\"}");
         init();
     }
 
