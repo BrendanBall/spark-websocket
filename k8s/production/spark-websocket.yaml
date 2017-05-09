@@ -1,5 +1,5 @@
 kind: Deployment
-apiVersion: v1
+apiVersion: apps/v1beta1
 metadata:
   name: spark-websocket
 spec:
@@ -13,7 +13,7 @@ spec:
         env: production
     spec:
       containers:
-      - name: backend
+      - name: app
         image: uctdemo/spark-websocket:master.1
         resources:
           limits:
@@ -24,7 +24,6 @@ spec:
           httpGet:
             path: /healthcheck
             port: 8080
-        command: ["sh", "-c", "app -port=8080"]
         ports:
         - name: spark-websocket
           containerPort: 8080
