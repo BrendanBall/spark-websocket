@@ -11,4 +11,8 @@ node {
   stage ('build docker image') {
     sh("docker build -t ${imageTag} .")
   }
+
+  stage ('deploy') {
+    sh("")
+  }
 }

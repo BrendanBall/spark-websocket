@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: v1
+metadata:
+  name: spark-websocket
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: spark-websocket
+      labels:
+        app: spark-websocket
+        role: app
+        env: production
+    spec:
+      containers:
+      - name: backend
+        image: uctdemo/spark-websocket:master.1
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: IfNotPresent
+        readinessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 8080
+        command: ["sh", "-c", "app -port=8080"]
+        ports:
+        - name: spark-websocket
+          containerPort: 8080

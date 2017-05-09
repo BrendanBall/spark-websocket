@@ -18,6 +18,7 @@ public class Chat {
         staticFiles.expireTime(600);
         port(8080);
         webSocket("/chat", ChatWebSocketHandler.class);
+        get("/healthcheck", (req, res) -> "healthy");
         init();
     }
 
