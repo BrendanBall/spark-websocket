@@ -15,10 +15,6 @@ spec:
       containers:
       - name: app
         image: uctdemo/spark-websocket:master.1
-        resources:
-          limits:
-            memory: "500Mi"
-            cpu: "100m"
         imagePullPolicy: IfNotPresent
         readinessProbe:
           httpGet:
