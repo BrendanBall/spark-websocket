@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+
+group = 'sparksocket'
+version = '1.0-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = "Chat"
+
+repositories {
+        
+     maven { url "https://repo.jenkins-ci.org/public/" }
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+    compile group: 'com.sparkjava', name: 'spark-core', version:'2.5.5'
+    compile group: 'com.j2html', name: 'j2html', version:'0.99'
+    compile group: 'org.json', name: 'json', version:'20160810'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version:'1.7.21'
+}
