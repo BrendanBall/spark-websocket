@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE_TAG = script(echo "uctdemo/spark-websocket:${env.BRANCH_NAME}.${env.BUILD_NUMBER}")
+        IMAGE_TAG = script { echo "uctdemo/spark-websocket:${env.BRANCH_NAME}.${env.BUILD_NUMBER}" }
     }
     stages {
         stage ('compile') {
