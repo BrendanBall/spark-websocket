@@ -15,6 +15,7 @@ node {
         stage ('deploy') {
             sh("sed -i.bak 's#uctdemo/spark-websocket:master.1#${imageTag}#' ./k8s/production/*.yaml")
             sh("kubectl apply -f k8s/production/")
+            sh("kubectl apply -f k8s/services/")
         }
     }
 }
