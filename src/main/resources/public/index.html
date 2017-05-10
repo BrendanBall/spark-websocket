@@ -6,12 +6,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>Current time from server:</h1>
+    <h1 id="currentTime"></h1>
+    <img id="trollface" src=""/>
     <div id="chatControls">
         <input id="message" placeholder="Type your message">
         <button id="send">Send</button>
     </div>
     <ul id="userlist"> <!-- Built by JS --> </ul>
     <div id="chat">    <!-- Built by JS --> </div>
+    <script src="axios.min.js"></script>
     <script src="websocketDemo.js"></script>
 </body>
 </html>

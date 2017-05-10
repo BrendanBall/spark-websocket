@@ -1,7 +1,6 @@
 //Establish the WebSocket connection and set up event handlers
 var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/chat");
 webSocket.onmessage = function (msg) { updateChat(msg); };
-webSocket.onclose = function () { alert("WebSocket connection closed") };
 
 //Send message if "Send" is clicked
 id("send").addEventListener("click", function () {
@@ -12,6 +11,32 @@ id("send").addEventListener("click", function () {
 id("message").addEventListener("keypress", function (e) {
     if (e.keyCode === 13) { sendMessage(e.target.value); }
 });
+
+window.setInterval(function() {setCurrentTime();}, 1000);
+window.setInterval(function() {setTrollface();}, 1000);
+
+function setCurrentTime() {
+    try {
+        axios.get("/currentTime")
+            .then(function (response) {
+                id("currentTime").innerHTML = response.data;
+                console.log(response.data);
+            }).catch(function (error) {
+            id("currentTime").innerHTML = "ERROR"
+        });
+    } catch (exception) {
+        if(exception.name == 'NetworkError'){
+            id("currentTime").innerHTML = "ERROR"
+        }
+    }
+}
+
+function setTrollface() {
+    axios.get("/trollface.jpg")
+        .then(function(response){
+            id("trollface").src = "/trollface.jpg";
+        });
+}
 
 //Send a message if it's not empty, then clear the input field
 function sendMessage(message) {
